@@ -2,7 +2,6 @@ package cn.keking.anti_reptile.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -13,214 +12,220 @@ import java.util.concurrent.TimeUnit;
 @ConfigurationProperties(prefix = "anti.reptile")
 public class AntiReptileProperties {
 
-    /**
-     * 是否启用反爬虫插件
-     */
-    private boolean enabled;
+	/**
+	 * 是否启用反爬虫插件
+	 */
+	private boolean enabled;
 
-    /**
-     * 是否启用全局拦截，默认为false，可设置为true全局拦截
-     */
-    private boolean globalFilterMode = false;
+	/**
+	 * 是否启用全局拦截，默认为false，可设置为true全局拦截
+	 */
+	private boolean globalFilterMode = false;
 
-    /**
-     * 非全局拦截下，需要反爬的接口列表，以'/'开头，以','分隔
-     */
-    private List<String> includeUrls;
+	/**
+	 * 非全局拦截下，需要反爬的接口列表，以'/'开头，以','分隔
+	 */
+	private List<String> includeUrls;
 
-    /**
-     * 基于请求IP的反爬规则
-     */
-    private IpRule ipRule = new IpRule();
+	/**
+	 * 基于请求IP的反爬规则
+	 */
+	private IpRule ipRule = new IpRule();
 
-    /**
-     * 基于请求User-Agent的反爬规则
-     */
-    private UaRule uaRule = new UaRule();
+	/**
+	 * 基于请求User-Agent的反爬规则
+	 */
+	private UaRule uaRule = new UaRule();
 
-    public boolean isEnabled() {
-        return enabled;
-    }
+	public boolean isEnabled() {
+		return enabled;
+	}
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
-    public List<String> getIncludeUrls() {
-        return includeUrls;
-    }
+	public List<String> getIncludeUrls() {
+		return includeUrls;
+	}
 
-    public void setIncludeUrls(List<String> includeUrls) {
-        this.includeUrls = includeUrls;
-    }
+	public void setIncludeUrls(List<String> includeUrls) {
+		this.includeUrls = includeUrls;
+	}
 
-    public IpRule getIpRule() {
-        return ipRule;
-    }
+	public IpRule getIpRule() {
+		return ipRule;
+	}
 
-    public void setIpRule(IpRule ipRule) {
-        this.ipRule = ipRule;
-    }
+	public void setIpRule(IpRule ipRule) {
+		this.ipRule = ipRule;
+	}
 
-    public UaRule getUaRule() {
-        return uaRule;
-    }
+	public UaRule getUaRule() {
+		return uaRule;
+	}
 
-    public void setUaRule(UaRule uaRule) {
-        this.uaRule = uaRule;
-    }
+	public void setUaRule(UaRule uaRule) {
+		this.uaRule = uaRule;
+	}
 
-    public boolean isGlobalFilterMode() {
-        return globalFilterMode;
-    }
-    public void setGlobalFilterMode(boolean globalFilterMode) {
-        this.globalFilterMode = globalFilterMode;
-    }
+	public boolean isGlobalFilterMode() {
+		return globalFilterMode;
+	}
 
-    public static class IpRule {
+	public void setGlobalFilterMode(boolean globalFilterMode) {
+		this.globalFilterMode = globalFilterMode;
+	}
 
-        /**
-         * 是否启用IP Rule：默认启用
-         */
-        private boolean enabled = true;
+	public static class IpRule {
 
-        /**
-         * 时间窗口：默认5000ms
-         */
-        private Integer expirationTime = 5000;
+		/**
+		 * 是否启用IP Rule：默认启用
+		 */
+		private boolean enabled = true;
 
-        /**
-         * 最大请求数，默认20
-         */
-        private Integer requestMaxSize = 20;
+		/**
+		 * 时间窗口：默认5000ms
+		 */
+		private Integer expirationTime = 5000;
 
-        /**
-         * 命中规则后，锁定期限,默认10天，单位：秒（s）
-         */
-        private long lockExpire = TimeUnit.DAYS.toSeconds(1);
-        /**
-         * IP白名单，支持后缀'*'通配，以','分隔
-         */
-        private List<String> ignoreIp;
+		/**
+		 * 最大请求数，默认20
+		 */
+		private Integer requestMaxSize = 20;
 
-        public long getLockExpire() {
-            return lockExpire;
-        }
+		/**
+		 * 命中规则后，锁定期限,默认10天，单位：秒（s）
+		 */
+		private long lockExpire = TimeUnit.DAYS.toSeconds(1);
 
-        public void setLockExpire(long lockExpire) {
-            this.lockExpire = lockExpire;
-        }
+		/**
+		 * IP白名单，支持后缀'*'通配，以','分隔
+		 */
+		private List<String> ignoreIp;
 
-        public boolean isEnabled() {
-            return enabled;
-        }
+		public long getLockExpire() {
+			return lockExpire;
+		}
 
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
+		public void setLockExpire(long lockExpire) {
+			this.lockExpire = lockExpire;
+		}
 
-        public Integer getExpirationTime() {
-            return expirationTime;
-        }
+		public boolean isEnabled() {
+			return enabled;
+		}
 
-        public void setExpirationTime(Integer expirationTime) {
-            this.expirationTime = expirationTime;
-        }
+		public void setEnabled(boolean enabled) {
+			this.enabled = enabled;
+		}
 
-        public Integer getRequestMaxSize() {
-            return requestMaxSize;
-        }
+		public Integer getExpirationTime() {
+			return expirationTime;
+		}
 
-        public void setRequestMaxSize(Integer requestMaxSize) {
-            this.requestMaxSize = requestMaxSize;
-        }
+		public void setExpirationTime(Integer expirationTime) {
+			this.expirationTime = expirationTime;
+		}
 
-        public List<String> getIgnoreIp() {
-            return ignoreIp;
-        }
+		public Integer getRequestMaxSize() {
+			return requestMaxSize;
+		}
 
-        public void setIgnoreIp(List<String> ignoreIp) {
-            this.ignoreIp = ignoreIp;
-        }
-    }
+		public void setRequestMaxSize(Integer requestMaxSize) {
+			this.requestMaxSize = requestMaxSize;
+		}
 
-    public static class UaRule {
-        /**
-         * 是否启用User-Agent Rule：默认启用
-         */
-        private boolean enabled = true;
+		public List<String> getIgnoreIp() {
+			return ignoreIp;
+		}
 
-        /**
-         * 是否允许Linux系统访问：默认否
-         */
-        private boolean allowedLinux = false;
+		public void setIgnoreIp(List<String> ignoreIp) {
+			this.ignoreIp = ignoreIp;
+		}
 
-        /**
-         * 是否允许移动端设备访问：默认是
-         */
-        private boolean allowedMobile = true;
+	}
 
-        /**
-         *  是否允许移PC设备访问: 默认是
-         */
-        private boolean allowedPc = true;
+	public static class UaRule {
 
-        /**
-         * 是否允许Iot设备访问：默认否
-         */
-        private boolean allowedIot = false;
+		/**
+		 * 是否启用User-Agent Rule：默认启用
+		 */
+		private boolean enabled = true;
 
-        /**
-         * 是否允许代理访问：默认否
-         */
-        private boolean allowedProxy = false;
+		/**
+		 * 是否允许Linux系统访问：默认否
+		 */
+		private boolean allowedLinux = false;
 
-        public boolean isEnabled() {
-            return enabled;
-        }
+		/**
+		 * 是否允许移动端设备访问：默认是
+		 */
+		private boolean allowedMobile = true;
 
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
+		/**
+		 * 是否允许移PC设备访问: 默认是
+		 */
+		private boolean allowedPc = true;
 
-        public boolean isAllowedLinux() {
-            return allowedLinux;
-        }
+		/**
+		 * 是否允许Iot设备访问：默认否
+		 */
+		private boolean allowedIot = false;
 
-        public void setAllowedLinux(boolean allowedLinux) {
-            this.allowedLinux = allowedLinux;
-        }
+		/**
+		 * 是否允许代理访问：默认否
+		 */
+		private boolean allowedProxy = false;
 
-        public boolean isAllowedMobile() {
-            return allowedMobile;
-        }
+		public boolean isEnabled() {
+			return enabled;
+		}
 
-        public void setAllowedMobile(boolean allowedMobile) {
-            this.allowedMobile = allowedMobile;
-        }
+		public void setEnabled(boolean enabled) {
+			this.enabled = enabled;
+		}
 
-        public boolean isAllowedPc() {
-            return allowedPc;
-        }
+		public boolean isAllowedLinux() {
+			return allowedLinux;
+		}
 
-        public void setAllowedPc(boolean allowedPc) {
-            this.allowedPc = allowedPc;
-        }
+		public void setAllowedLinux(boolean allowedLinux) {
+			this.allowedLinux = allowedLinux;
+		}
 
-        public boolean isAllowedIot() {
-            return allowedIot;
-        }
+		public boolean isAllowedMobile() {
+			return allowedMobile;
+		}
 
-        public void setAllowedIot(boolean allowedIot) {
-            this.allowedIot = allowedIot;
-        }
+		public void setAllowedMobile(boolean allowedMobile) {
+			this.allowedMobile = allowedMobile;
+		}
 
-        public boolean isAllowedProxy() {
-            return allowedProxy;
-        }
+		public boolean isAllowedPc() {
+			return allowedPc;
+		}
 
-        public void setAllowedProxy(boolean allowedProxy) {
-            this.allowedProxy = allowedProxy;
-        }
-    }
+		public void setAllowedPc(boolean allowedPc) {
+			this.allowedPc = allowedPc;
+		}
+
+		public boolean isAllowedIot() {
+			return allowedIot;
+		}
+
+		public void setAllowedIot(boolean allowedIot) {
+			this.allowedIot = allowedIot;
+		}
+
+		public boolean isAllowedProxy() {
+			return allowedProxy;
+		}
+
+		public void setAllowedProxy(boolean allowedProxy) {
+			this.allowedProxy = allowedProxy;
+		}
+
+	}
+
 }

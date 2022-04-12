@@ -1,6 +1,5 @@
 package cn.keking.anti_reptile.config;
 
-
 import io.netty.channel.nio.NioEventLoopGroup;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -15,6 +14,7 @@ import org.springframework.util.ClassUtils;
 
 /**
  * 没有redisson starter时才加载
+ *
  * @author chenjh
  * @since 2019/7/17 8:21
  */
@@ -23,183 +23,193 @@ import org.springframework.util.ClassUtils;
 @ConditionalOnMissingClass("org.redisson.spring.starter.RedissonAutoConfiguration")
 public class RedissonAutoConfig {
 
-    private String address;
-    private int connectionMinimumIdleSize = 10;
-    private int idleConnectionTimeout=10000;
-    private int connectTimeout=10000;
-    private int timeout=3000;
-    private int retryAttempts=3;
-    private int retryInterval=1500;
-    private String password = null;
-    private int subscriptionsPerConnection=5;
-    private String clientName=null;
-    private int subscriptionConnectionMinimumIdleSize = 1;
-    private int subscriptionConnectionPoolSize = 50;
-    private int connectionPoolSize = 64;
-    private int database = 0;
-    private boolean dnsMonitoring = false;
-    private int dnsMonitoringInterval = 5000;
+	private String address;
 
-    private String codec="org.redisson.codec.JsonJacksonCodec";
+	private int connectionMinimumIdleSize = 10;
 
-    @Bean(destroyMethod = "shutdown")
-    @ConditionalOnMissingBean
-    RedissonClient redisson() throws Exception {
-        Config config = new Config();
-        config.useSingleServer().setAddress(address)
-                .setConnectionMinimumIdleSize(connectionMinimumIdleSize)
-                .setConnectionPoolSize(connectionPoolSize)
-                .setDatabase(database)
-                .setDnsMonitoringInterval(dnsMonitoringInterval)
-                .setSubscriptionConnectionMinimumIdleSize(subscriptionConnectionMinimumIdleSize)
-                .setSubscriptionConnectionPoolSize(subscriptionConnectionPoolSize)
-                .setSubscriptionsPerConnection(subscriptionsPerConnection)
-                .setClientName(clientName)
-                .setRetryAttempts(retryAttempts)
-                .setRetryInterval(retryInterval)
-                .setTimeout(timeout)
-                .setConnectTimeout(connectTimeout)
-                .setIdleConnectionTimeout(idleConnectionTimeout)
-                .setPassword(password);
-        Codec codec=(Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
-        config.setCodec(codec);
-        config.setEventLoopGroup(new NioEventLoopGroup());
-        return Redisson.create(config);
-    }
+	private int idleConnectionTimeout = 10000;
 
-    public String getAddress() {
-        return address;
-    }
+	private int connectTimeout = 10000;
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	private int timeout = 3000;
 
-    public int getIdleConnectionTimeout() {
-        return idleConnectionTimeout;
-    }
+	private int retryAttempts = 3;
 
-    public void setIdleConnectionTimeout(int idleConnectionTimeout) {
-        this.idleConnectionTimeout = idleConnectionTimeout;
-    }
+	private int retryInterval = 1500;
 
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
+	private String password = null;
 
-    public void setConnectTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-    }
+	private int subscriptionsPerConnection = 5;
 
-    public int getTimeout() {
-        return timeout;
-    }
+	private String clientName = null;
 
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
-    }
+	private int subscriptionConnectionMinimumIdleSize = 1;
 
-    public int getRetryAttempts() {
-        return retryAttempts;
-    }
+	private int subscriptionConnectionPoolSize = 50;
 
-    public void setRetryAttempts(int retryAttempts) {
-        this.retryAttempts = retryAttempts;
-    }
+	private int connectionPoolSize = 64;
 
-    public int getRetryInterval() {
-        return retryInterval;
-    }
+	private int database = 0;
 
-    public void setRetryInterval(int retryInterval) {
-        this.retryInterval = retryInterval;
-    }
+	private boolean dnsMonitoring = false;
 
-    public String getPassword() {
-        return password;
-    }
+	private int dnsMonitoringInterval = 5000;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	private String codec = "org.redisson.codec.JsonJacksonCodec";
 
-    public int getSubscriptionsPerConnection() {
-        return subscriptionsPerConnection;
-    }
+	@Bean(destroyMethod = "shutdown")
+	@ConditionalOnMissingBean
+	RedissonClient redisson() throws Exception {
+		Config config = new Config();
+		config.useSingleServer().setAddress(address).setConnectionMinimumIdleSize(connectionMinimumIdleSize)
+				.setConnectionPoolSize(connectionPoolSize).setDatabase(database)
+				.setDnsMonitoringInterval(dnsMonitoringInterval)
+				.setSubscriptionConnectionMinimumIdleSize(subscriptionConnectionMinimumIdleSize)
+				.setSubscriptionConnectionPoolSize(subscriptionConnectionPoolSize)
+				.setSubscriptionsPerConnection(subscriptionsPerConnection).setClientName(clientName)
+				.setRetryAttempts(retryAttempts).setRetryInterval(retryInterval).setTimeout(timeout)
+				.setConnectTimeout(connectTimeout).setIdleConnectionTimeout(idleConnectionTimeout)
+				.setPassword(password);
+		Codec codec = (Codec) ClassUtils.forName(getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
+		config.setCodec(codec);
+		config.setEventLoopGroup(new NioEventLoopGroup());
+		return Redisson.create(config);
+	}
 
-    public void setSubscriptionsPerConnection(int subscriptionsPerConnection) {
-        this.subscriptionsPerConnection = subscriptionsPerConnection;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getClientName() {
-        return clientName;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
+	public int getIdleConnectionTimeout() {
+		return idleConnectionTimeout;
+	}
 
-    public int getSubscriptionConnectionMinimumIdleSize() {
-        return subscriptionConnectionMinimumIdleSize;
-    }
+	public void setIdleConnectionTimeout(int idleConnectionTimeout) {
+		this.idleConnectionTimeout = idleConnectionTimeout;
+	}
 
-    public void setSubscriptionConnectionMinimumIdleSize(int subscriptionConnectionMinimumIdleSize) {
-        this.subscriptionConnectionMinimumIdleSize = subscriptionConnectionMinimumIdleSize;
-    }
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
 
-    public int getSubscriptionConnectionPoolSize() {
-        return subscriptionConnectionPoolSize;
-    }
+	public void setConnectTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+	}
 
-    public void setSubscriptionConnectionPoolSize(int subscriptionConnectionPoolSize) {
-        this.subscriptionConnectionPoolSize = subscriptionConnectionPoolSize;
-    }
+	public int getTimeout() {
+		return timeout;
+	}
 
-    public int getConnectionMinimumIdleSize() {
-        return connectionMinimumIdleSize;
-    }
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
+	}
 
-    public void setConnectionMinimumIdleSize(int connectionMinimumIdleSize) {
-        this.connectionMinimumIdleSize = connectionMinimumIdleSize;
-    }
+	public int getRetryAttempts() {
+		return retryAttempts;
+	}
 
-    public int getConnectionPoolSize() {
-        return connectionPoolSize;
-    }
+	public void setRetryAttempts(int retryAttempts) {
+		this.retryAttempts = retryAttempts;
+	}
 
-    public void setConnectionPoolSize(int connectionPoolSize) {
-        this.connectionPoolSize = connectionPoolSize;
-    }
+	public int getRetryInterval() {
+		return retryInterval;
+	}
 
-    public int getDatabase() {
-        return database;
-    }
+	public void setRetryInterval(int retryInterval) {
+		this.retryInterval = retryInterval;
+	}
 
-    public void setDatabase(int database) {
-        this.database = database;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public boolean isDnsMonitoring() {
-        return dnsMonitoring;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setDnsMonitoring(boolean dnsMonitoring) {
-        this.dnsMonitoring = dnsMonitoring;
-    }
+	public int getSubscriptionsPerConnection() {
+		return subscriptionsPerConnection;
+	}
 
-    public int getDnsMonitoringInterval() {
-        return dnsMonitoringInterval;
-    }
+	public void setSubscriptionsPerConnection(int subscriptionsPerConnection) {
+		this.subscriptionsPerConnection = subscriptionsPerConnection;
+	}
 
-    public void setDnsMonitoringInterval(int dnsMonitoringInterval) {
-        this.dnsMonitoringInterval = dnsMonitoringInterval;
-    }
+	public String getClientName() {
+		return clientName;
+	}
 
-    public String getCodec() {
-        return codec;
-    }
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
 
-    public void setCodec(String codec) {
-        this.codec = codec;
-    }
+	public int getSubscriptionConnectionMinimumIdleSize() {
+		return subscriptionConnectionMinimumIdleSize;
+	}
+
+	public void setSubscriptionConnectionMinimumIdleSize(int subscriptionConnectionMinimumIdleSize) {
+		this.subscriptionConnectionMinimumIdleSize = subscriptionConnectionMinimumIdleSize;
+	}
+
+	public int getSubscriptionConnectionPoolSize() {
+		return subscriptionConnectionPoolSize;
+	}
+
+	public void setSubscriptionConnectionPoolSize(int subscriptionConnectionPoolSize) {
+		this.subscriptionConnectionPoolSize = subscriptionConnectionPoolSize;
+	}
+
+	public int getConnectionMinimumIdleSize() {
+		return connectionMinimumIdleSize;
+	}
+
+	public void setConnectionMinimumIdleSize(int connectionMinimumIdleSize) {
+		this.connectionMinimumIdleSize = connectionMinimumIdleSize;
+	}
+
+	public int getConnectionPoolSize() {
+		return connectionPoolSize;
+	}
+
+	public void setConnectionPoolSize(int connectionPoolSize) {
+		this.connectionPoolSize = connectionPoolSize;
+	}
+
+	public int getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(int database) {
+		this.database = database;
+	}
+
+	public boolean isDnsMonitoring() {
+		return dnsMonitoring;
+	}
+
+	public void setDnsMonitoring(boolean dnsMonitoring) {
+		this.dnsMonitoring = dnsMonitoring;
+	}
+
+	public int getDnsMonitoringInterval() {
+		return dnsMonitoringInterval;
+	}
+
+	public void setDnsMonitoringInterval(int dnsMonitoringInterval) {
+		this.dnsMonitoringInterval = dnsMonitoringInterval;
+	}
+
+	public String getCodec() {
+		return codec;
+	}
+
+	public void setCodec(String codec) {
+		this.codec = codec;
+	}
+
 }

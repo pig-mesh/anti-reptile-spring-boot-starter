@@ -8,59 +8,59 @@ import java.io.Serializable;
  */
 public class VerifyImageDTO implements Serializable {
 
-    private static final long serialVersionUID = 6741944800448697513L;
+	private static final long serialVersionUID = 6741944800448697513L;
 
-    private String verifyId;
-    private String verifyType;
-    private String verifyImgStr;
-    private String result;
+	private String verifyId;
 
-    public VerifyImageDTO(String verifyId, String verifyType, String verifyImgStr, String result) {
-        this.verifyId = verifyId;
-        this.verifyType = verifyType;
-        this.verifyImgStr = verifyImgStr;
-        this.result = result;
-    }
+	private String verifyType;
 
-    public String getVerifyId() {
-        return verifyId;
-    }
+	private String verifyImgStr;
 
-    public void setVerifyId(String verifyId) {
-        this.verifyId = verifyId;
-    }
+	private String result;
 
-    public String getVerifyType() {
-        return verifyType;
-    }
+	public VerifyImageDTO(String verifyId, String verifyType, String verifyImgStr, String result) {
+		this.verifyId = verifyId;
+		this.verifyType = verifyType;
+		this.verifyImgStr = verifyImgStr;
+		this.result = result;
+	}
 
-    public void setVerifyType(String verifyType) {
-        this.verifyType = verifyType;
-    }
+	public String getVerifyId() {
+		return verifyId;
+	}
 
-    public String getVerifyImgStr() {
-        return verifyImgStr;
-    }
+	public void setVerifyId(String verifyId) {
+		this.verifyId = verifyId;
+	}
 
-    public void setVerifyImgStr(String verifyImgStr) {
-        this.verifyImgStr = verifyImgStr;
-    }
+	public String getVerifyType() {
+		return verifyType;
+	}
 
-    public String getResult() {
-        return result;
-    }
+	public void setVerifyType(String verifyType) {
+		this.verifyType = verifyType;
+	}
 
-    public void setResult(String result) {
-        this.result = result;
-    }
+	public String getVerifyImgStr() {
+		return verifyImgStr;
+	}
 
-    @Override
-    public String toString() {
-        return "VerifyImageDTO{" +
-                "verifyId='" + verifyId + '\'' +
-                ", verifyType='" + verifyType + '\'' +
-                ", verifyImgStr='" + verifyImgStr + '\'' +
-                ", result='" + result + '\'' +
-                '}';
-    }
+	public void setVerifyImgStr(String verifyImgStr) {
+		this.verifyImgStr = verifyImgStr;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	@Override
+	public String toString() {
+		return "VerifyImageDTO{" + "verifyId='" + verifyId + '\'' + ", verifyType='" + verifyType + '\''
+				+ ", verifyImgStr='" + verifyImgStr + '\'' + ", result='" + result + '\'' + '}';
+	}
+
 }

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class AbstractRule implements AntiReptileRule {
 
+	@Override
+	public boolean execute(HttpServletRequest request, HttpServletResponse response) {
+		return doExecute(request, response);
+	}
 
-    @Override
-    public boolean execute(HttpServletRequest request, HttpServletResponse response) {
-        return doExecute(request,response);
-    }
+	protected abstract boolean doExecute(HttpServletRequest request, HttpServletResponse response);
 
-    protected abstract boolean doExecute(HttpServletRequest request, HttpServletResponse response);
 }

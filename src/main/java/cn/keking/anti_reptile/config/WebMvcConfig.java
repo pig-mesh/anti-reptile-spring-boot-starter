@@ -12,15 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-    private AntiReptileInterceptor antiReptileInterceptor;
+	private AntiReptileInterceptor antiReptileInterceptor;
 
-    public WebMvcConfig(AntiReptileInterceptor antiReptileInterceptor) {
-        this.antiReptileInterceptor = antiReptileInterceptor;
-    }
+	public WebMvcConfig(AntiReptileInterceptor antiReptileInterceptor) {
+		this.antiReptileInterceptor = antiReptileInterceptor;
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(this.antiReptileInterceptor).addPathPatterns("/**");
-        super.addInterceptors(registry);
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(this.antiReptileInterceptor).addPathPatterns("/**");
+		super.addInterceptors(registry);
+	}
+
 }

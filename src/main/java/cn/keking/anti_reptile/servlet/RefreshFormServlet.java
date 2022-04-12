@@ -19,28 +19,30 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class RefreshFormServlet extends HttpServlet {
 
-    private ValidateFormService validateFormService;
+	private ValidateFormService validateFormService;
 
-    private AtomicBoolean initialized = new AtomicBoolean(false);
+	private AtomicBoolean initialized = new AtomicBoolean(false);
 
-    private synchronized void init(ServletContext servletContext) {
-        ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-        assert ctx != null;
-        this.validateFormService = ctx.getBean(ValidateFormService.class);
-    }
+	private synchronized void init(ServletContext servletContext) {
+		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+		assert ctx != null;
+		this.validateFormService = ctx.getBean(ValidateFormService.class);
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!initialized.get()) {
-            init(request.getServletContext());
-            initialized.set(true);
-        }
-        String result = validateFormService.refresh(request);
-        CrosUtil.setCrosHeader(response);
-        response.setContentType("application/json;charset=utf-8");
-        response.setStatus(200);
-        response.getWriter().write(result);
-        response.getWriter().close();
-        return;
-    }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (!initialized.get()) {
+			init(request.getServletContext());
+			initialized.set(true);
+		}
+		String result = validateFormService.refresh(request);
+		CrosUtil.setCrosHeader(response);
+		response.setContentType("application/json;charset=utf-8");
+		response.setStatus(200);
+		response.getWriter().write(result);
+		response.getWriter().close();
+		return;
+	}
+
 }

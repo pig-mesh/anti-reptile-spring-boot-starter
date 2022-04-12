@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
  * @author chenjh 接口反爬虫注解
  * @since 2020/2/4 15:44
  */
-@Target(value = {ElementType.METHOD})
+@Target(value = { ElementType.METHOD })
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface AntiReptile {
+
 }
